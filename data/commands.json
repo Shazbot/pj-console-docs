@@ -2610,6 +2610,19 @@
    "target": "none",
    "args": [],
    "summary": "Clear the console output."
+  },
+  {
+   "id": "resetpos",
+   "category": "console",
+   "syntax": [
+    "resetpos"
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [],
+   "summary": "Move the console back to the top left.",
+   "details": "Double-clicking the grip on the left of the console box does the same."
   }
  ]
 }
