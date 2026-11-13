@@ -103,6 +103,40 @@ for (const [src, [table, col, locName, prefix]] of Object.entries(simple)) {
   sources[src] = readTable(table).map((r) => [r[col], L ? L.get(prefix + r[col]) : undefined]);
 }
 
+// agent spawns heroes only (cm:spawn_agent_*), spawn spawns lords (create_force, agent type general).
+// Same rule as the mod's mod.subtype_kind: the subtype's unit's UI group parent (commander = lord,
+// heroes_agents = hero), with these vanilla subtypes forced. Keep in sync with
+// mod.subtype_kind_overrides in pj_console.lua.
+const subtypeKindOverrides = {
+  wh2_dlc16_wef_drycha: 'lord', wh2_pro08_neu_gotrek: 'lord',
+  wh3_dlc27_nor_great_shaman_sorcerer_death: 'lord', wh3_dlc27_nor_great_shaman_sorcerer_fire: 'lord',
+  wh3_dlc27_nor_great_shaman_sorcerer_metal: 'lord', wh3_dlc29_chs_bloab_lord: 'lord',
+  wh3_dlc29_chs_morbidex_lord: 'lord', wh3_dlc29_chs_orghotts_lord: 'lord',
+  wh_dlc04_vmp_vlad_con_carstein: 'lord', wh_pro02_vmp_isabella_von_carstein: 'lord',
+  wh2_dlc17_dwf_thane_ghost_artifact: 'hero', wh3_dlc25_nur_skin_wolf_werekin_chieftain: 'hero',
+  wh_dlc06_dwf_master_engineer_ghost: 'hero', wh_dlc06_dwf_runesmith_ghost: 'hero',
+  wh_dlc06_dwf_thane_ghost_1: 'hero', wh_dlc06_dwf_thane_ghost_2: 'hero',
+};
+{
+  const unitGroup = new Map(readTable('main_units_tables').map((r) => [r.unit, r.ui_unit_group_land]));
+  const groupParent = new Map(readTable('ui_unit_groupings_tables').map((r) => [r.key, r.parent_group]));
+  const kind = new Map();
+  for (const r of readTable('agent_subtypes_tables')) {
+    const parent = groupParent.get(unitGroup.get(r.associated_unit_override));
+    const k = subtypeKindOverrides[r.key] ?? (parent === 'commander' ? 'lord' : parent === 'heroes_agents' ? 'hero' : null);
+    if (k) kind.set(r.key, k);
+  }
+  // the overrides cover vanilla as of the dump; warn when a new subtype's skill set disagrees with its group
+  for (const r of readTable('character_skill_node_sets_tables')) {
+    if (!r.agent_subtype_key || !r.agent_key) continue;
+    const want = r.agent_key === 'general' ? 'lord' : 'hero';
+    if (kind.get(r.agent_subtype_key) !== want) console.warn(`warn: ${r.agent_subtype_key} is a ${want} by skill set but ${kind.get(r.agent_subtype_key) ?? 'neither'} by unit group; add it to subtypeKindOverrides and the mod`);
+  }
+  sources.hero_subtypes = sources.agent_subtypes.filter(([k]) => kind.get(k) === 'hero');
+  sources.lord_subtypes = sources.agent_subtypes.filter(([k]) => kind.get(k) === 'lord');
+  sources.hero_agents = ['champion', 'dignitary', 'engineer', 'runesmith', 'spy', 'wizard'].map((k) => [k, undefined]);
+}
+
 // Minor cults have no DB table; the game defines them in MINOR_CULT_LIST (same source the mod reads).
 {
   const f = path.join(dump, 'script', 'campaign', 'wh3_campaign_minor_cults.lua');

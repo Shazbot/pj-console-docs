@@ -623,7 +623,7 @@
     {
      "name": "subtype",
      "optional": false,
-     "keys": "agent_subtypes"
+     "keys": "lord_subtypes"
     },
     {
      "name": "faction",
@@ -654,12 +654,12 @@
     {
      "name": "agent",
      "optional": false,
-     "keys": "agents"
+     "keys": "hero_agents"
     },
     {
      "name": "subtype",
      "optional": true,
-     "keys": "agent_subtypes"
+     "keys": "hero_subtypes"
     }
    ],
    "summary": "Spawn an agent for your faction at the open settlement or army."

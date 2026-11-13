@@ -6,7 +6,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const SOURCE_LABELS = {
   units: 'Units', ancillaries: 'Ancillaries', techs: 'Technologies', traits: 'Traits', skills: 'Skills',
   incidents: 'Incidents', dilemmas: 'Dilemmas', missions: 'Missions', rituals: 'Rituals', factions: 'Factions',
-  agents: 'Agents', agent_subtypes: 'Agent subtypes', unique_agents: 'Unique agents', buildings: 'Buildings', ingredients: 'Ingredients',
+  agents: 'Agents', agent_subtypes: 'Agent subtypes', unique_agents: 'Unique agents', hero_agents: 'Hero types', hero_subtypes: 'Hero subtypes', lord_subtypes: 'Lord subtypes', buildings: 'Buildings', ingredients: 'Ingredients',
   effect_bundles: 'Effect bundles', pooled_resources: 'Pooled resources',
   recruitment_sources: 'Recruitment sources', slot_sets: 'Slot sets', minor_cults: 'Minor cults',
 };
