@@ -1,0 +1,13 @@
+{
+  "name": "pj-console-docs",
+  "private": true,
+  "type": "module",
+  "description": "Static documentation site for the pj_console Total War: Warhammer 3 mod",
+  "scripts": {
+    "build:keys": "node tools/build-keys.mjs",
+    "check": "node tools/check-commands.mjs",
+    "test": "node --test",
+    "deploy": "node tools/deploy.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}
