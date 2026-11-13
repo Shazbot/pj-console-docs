@@ -1,0 +1,2771 @@
+{
+ "version": 1,
+ "categories": [
+  {
+   "id": "character",
+   "label": "Characters",
+   "blurb": "Commands that act on the selected character or its army."
+  },
+  {
+   "id": "army",
+   "label": "Armies",
+   "blurb": "Commands that spawn, heal or change the selected army."
+  },
+  {
+   "id": "settlement",
+   "label": "Settlements",
+   "blurb": "Commands that act on the selected settlement."
+  },
+  {
+   "id": "diplomacy",
+   "label": "Diplomacy",
+   "blurb": "Force diplomatic states. Plain forms use the selection or a faction key; the \"2\" forms use the open diplomacy screen."
+  },
+  {
+   "id": "economy",
+   "label": "Economy",
+   "blurb": "Gold, research, resources, technologies and effect bundles for your faction."
+  },
+  {
+   "id": "events",
+   "label": "Events",
+   "blurb": "Trigger incidents, dilemmas, missions and rituals."
+  },
+  {
+   "id": "map",
+   "label": "Map",
+   "blurb": "Fog of war, map reveal and map export."
+  },
+  {
+   "id": "debug",
+   "label": "Debug",
+   "blurb": "Info overlays, UI dumps and script execution."
+  },
+  {
+   "id": "console",
+   "label": "Console",
+   "blurb": "Features of the console itself: chaining, aliases, script files."
+  }
+ ],
+ "commands": [
+  {
+   "id": "add-unit",
+   "category": "army",
+   "syntax": [
+    "au <unit> [count] [rank]",
+    "add unit <unit> [count] [rank]"
+   ],
+   "aliases": [
+    "add unit"
+   ],
+   "patterns": [
+    "add unit ([^ ]+) (%d+) (%d+)",
+    "add unit ([^ ]+) (%d+)",
+    "add unit ([^ ]+)",
+    "au ([^ ]+) (%d+) (%d+)",
+    "au ([^ ]+) (%d+)",
+    "au ([^ ]+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "unit",
+     "optional": false,
+     "keys": "units"
+    },
+    {
+     "name": "count",
+     "optional": true
+    },
+    {
+     "name": "rank",
+     "optional": true
+    }
+   ],
+   "summary": "Add units to the selected army.",
+   "details": "Count defaults to 1. Rank is 0 to 9 and only applies to the newly added units.",
+   "examples": [
+    "au wh_main_emp_inf_swordsmen 3 9"
+   ]
+  },
+  {
+   "id": "add-army-xp",
+   "category": "army",
+   "syntax": [
+    "add axp [ranks]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "add axp (%d+)",
+    "add axp"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "ranks",
+     "optional": true
+    }
+   ],
+   "summary": "Raise the experience rank of every unit in the selected army.",
+   "details": "Ranks defaults to 1."
+  },
+  {
+   "id": "add-xp",
+   "category": "character",
+   "syntax": [
+    "add xp <xp>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "add xp (%d+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "xp",
+     "optional": false
+    }
+   ],
+   "summary": "Give experience points to the selected character."
+  },
+  {
+   "id": "rank",
+   "category": "character",
+   "syntax": [
+    "rank <rank>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rank (%d+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "rank",
+     "optional": false
+    }
+   ],
+   "summary": "Set the selected character to a rank."
+  },
+  {
+   "id": "rankup",
+   "category": "character",
+   "syntax": [
+    "rankup [times]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rankup",
+    "rankup (%d+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "times",
+     "optional": true
+    }
+   ],
+   "summary": "Raise the selected character by one or more ranks.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "add-skill",
+   "category": "character",
+   "syntax": [
+    "skill <skill>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "skill (.+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "skill",
+     "optional": false,
+     "keys": "skills"
+    }
+   ],
+   "summary": "Unlock a skill on the selected character."
+  },
+  {
+   "id": "remove-skill",
+   "category": "character",
+   "syntax": [
+    "rs <skill>",
+    "remove skill <skill>"
+   ],
+   "aliases": [
+    "remove skill"
+   ],
+   "patterns": [
+    "remove skill (.+)",
+    "rs (.+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "skill",
+     "optional": false,
+     "keys": "skills"
+    }
+   ],
+   "summary": "Remove one skill point from a skill on the selected character."
+  },
+  {
+   "id": "reset-skills",
+   "category": "character",
+   "syntax": [
+    "reset skills"
+   ],
+   "aliases": [],
+   "patterns": [
+    "reset skills"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Refund all skill points of the selected character."
+  },
+  {
+   "id": "all-skills",
+   "category": "character",
+   "syntax": [
+    "allskills"
+   ],
+   "aliases": [],
+   "patterns": [
+    "allskills"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Max out all skills of the selected character.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "add-trait",
+   "category": "character",
+   "syntax": [
+    "at <trait> [points]",
+    "add trait <trait> [points]"
+   ],
+   "aliases": [
+    "add trait"
+   ],
+   "patterns": [
+    "add trait ([^ ]+)",
+    "add trait ([^ ]+) (%d+)",
+    "at ([^ ]+)",
+    "at ([^ ]+) (%d+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "trait",
+     "optional": false,
+     "keys": "traits"
+    },
+    {
+     "name": "points",
+     "optional": true
+    }
+   ],
+   "summary": "Give the selected character a trait.",
+   "details": "Points defaults to 1."
+  },
+  {
+   "id": "remove-trait",
+   "category": "character",
+   "syntax": [
+    "rt <trait>",
+    "remove trait <trait>"
+   ],
+   "aliases": [
+    "remove trait"
+   ],
+   "patterns": [
+    "remove trait (.+)",
+    "rt (.+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "trait",
+     "optional": false,
+     "keys": "traits"
+    }
+   ],
+   "summary": "Remove a trait from the selected character."
+  },
+  {
+   "id": "add-ancillary",
+   "category": "character",
+   "syntax": [
+    "aa <ancillary>",
+    "add ancillary <ancillary>"
+   ],
+   "aliases": [
+    "add ancillary"
+   ],
+   "patterns": [
+    "add ancillary (.+)",
+    "aa (.+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "ancillary",
+     "optional": false,
+     "keys": "ancillaries"
+    }
+   ],
+   "summary": "Equip or give an ancillary to the selected character."
+  },
+  {
+   "id": "armory",
+   "category": "character",
+   "syntax": [
+    "armory"
+   ],
+   "aliases": [],
+   "patterns": [
+    "armory"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Unlock all armory items for the selected character.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "add-mov",
+   "category": "character",
+   "syntax": [
+    "am",
+    "add mov"
+   ],
+   "aliases": [
+    "add mov"
+   ],
+   "patterns": [
+    "add mov",
+    "am"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Refill the selected character's movement points."
+  },
+  {
+   "id": "mov",
+   "category": "character",
+   "syntax": [
+    "mov"
+   ],
+   "aliases": [],
+   "patterns": [
+    "mov"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Give the selected character a huge movement range.",
+   "details": "Applies a movement effect bundle. Undo it with \"mov off\"."
+  },
+  {
+   "id": "mov-off",
+   "category": "character",
+   "syntax": [
+    "mov off"
+   ],
+   "aliases": [],
+   "patterns": [
+    "mov off"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Remove the huge movement bundle."
+  },
+  {
+   "id": "tele",
+   "category": "character",
+   "syntax": [
+    "tele"
+   ],
+   "aliases": [],
+   "patterns": [
+    "tele"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Teleport a character.",
+   "details": "With a settlement open, teleports the selected character next to it. With the army panel open, teleports the previously selected character next to the current one."
+  },
+  {
+   "id": "immortal",
+   "category": "character",
+   "syntax": [
+    "immortal [off]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "immortal",
+    "immortal (off)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "off",
+     "optional": true
+    }
+   ],
+   "summary": "Make the selected character immortal, or mortal again with off."
+  },
+  {
+   "id": "wound",
+   "category": "character",
+   "syntax": [
+    "wound <turns>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "wound (%d+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "turns",
+     "optional": false
+    }
+   ],
+   "summary": "Wound the selected character for a number of turns."
+  },
+  {
+   "id": "rename",
+   "category": "character",
+   "syntax": [
+    "rename <forename> [surname]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rename ([^ ]+)",
+    "rename ([^ ]+) ([^ ]+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "forename",
+     "optional": false
+    },
+    {
+     "name": "surname",
+     "optional": true
+    }
+   ],
+   "summary": "Rename the selected character."
+  },
+  {
+   "id": "loyalty",
+   "category": "character",
+   "syntax": [
+    "loyalty <delta>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "loyalty (.+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "delta",
+     "optional": false
+    }
+   ],
+   "summary": "Change the selected character's loyalty by a number."
+  },
+  {
+   "id": "kill",
+   "category": "character",
+   "syntax": [
+    "kill"
+   ],
+   "aliases": [],
+   "patterns": [
+    "kill"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Kill the selected character together with its army."
+  },
+  {
+   "id": "killc",
+   "category": "character",
+   "syntax": [
+    "killc"
+   ],
+   "aliases": [],
+   "patterns": [
+    "killc"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Kill the selected character but keep the army."
+  },
+  {
+   "id": "kill2",
+   "category": "character",
+   "syntax": [
+    "kill2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "kill2"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Like kill, but also cancels convalescence so the character stays dead."
+  },
+  {
+   "id": "killc2",
+   "category": "character",
+   "syntax": [
+    "killc2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "killc2"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Like killc, but also cancels convalescence so the character stays dead."
+  },
+  {
+   "id": "hordegrowth",
+   "category": "character",
+   "syntax": [
+    "hordegrowth <points>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "hordegrowth (%-?%d+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "points",
+     "optional": false
+    }
+   ],
+   "summary": "Add growth points to the selected horde army.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "hordedev",
+   "category": "character",
+   "syntax": [
+    "hordedev"
+   ],
+   "aliases": [],
+   "patterns": [
+    "hordedev"
+   ],
+   "target": "army",
+   "args": [],
+   "summary": "Add one development point to the selected horde army.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "winstreak",
+   "category": "character",
+   "syntax": [
+    "winstreak [off]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "winstreak",
+    "winstreak (off)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "off",
+     "optional": true
+    }
+   ],
+   "summary": "Raise the win streak of the selected army, or lower it with off.",
+   "unavailable": true
+  },
+  {
+   "id": "reroll-init",
+   "category": "character",
+   "syntax": [
+    "reroll init"
+   ],
+   "aliases": [],
+   "patterns": [
+    "reroll init"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Reroll the selected character's initiatives.",
+   "unavailable": true
+  },
+  {
+   "id": "heal",
+   "category": "army",
+   "syntax": [
+    "heal <percent>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "heal (.+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "percent",
+     "optional": false
+    }
+   ],
+   "summary": "Heal the selected army to the given percentage.",
+   "examples": [
+    "heal 100"
+   ]
+  },
+  {
+   "id": "reinforce",
+   "category": "army",
+   "syntax": [
+    "reinforce"
+   ],
+   "aliases": [],
+   "patterns": [
+    "reinforce"
+   ],
+   "target": "army",
+   "args": [],
+   "summary": "Reinforce the selected army from everywhere in range."
+  },
+  {
+   "id": "spawn",
+   "category": "army",
+   "syntax": [
+    "spawn <subtype> [faction] [units]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "spawn ([^ ]-) ([^ ]-) ([^ ]-)",
+    "spawn ([^ ]-) ([^ ]-)",
+    "spawn ([^ ]-)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "subtype",
+     "optional": false,
+     "keys": "agent_subtypes"
+    },
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    },
+    {
+     "name": "units",
+     "optional": true
+    }
+   ],
+   "summary": "Spawn a new army led by a general of the given subtype next to the selection.",
+   "details": "Faction defaults to yours. Units is a comma-separated list of unit keys. Needs a settlement or the army panel open."
+  },
+  {
+   "id": "agent",
+   "category": "army",
+   "syntax": [
+    "agent <agent> [subtype]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "agent ([^ ]-)",
+    "agent ([^ ]-) ([^ ]-)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "agent",
+     "optional": false,
+     "keys": "agents"
+    },
+    {
+     "name": "subtype",
+     "optional": true,
+     "keys": "agent_subtypes"
+    }
+   ],
+   "summary": "Spawn an agent for your faction at the open settlement or army."
+  },
+  {
+   "id": "to-pool",
+   "category": "army",
+   "syntax": [
+    "to_pool <agent> <subtype>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "to_pool (.+) (.+)"
+   ],
+   "target": "none",
+   "args": [
+    {
+     "name": "agent",
+     "optional": false,
+     "keys": "agents"
+    },
+    {
+     "name": "subtype",
+     "optional": false,
+     "keys": "agent_subtypes"
+    }
+   ],
+   "summary": "Add a character to your faction's recruitment pool."
+  },
+  {
+   "id": "legend",
+   "category": "army",
+   "syntax": [
+    "legend <subtype>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "legend (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "subtype",
+     "optional": false,
+     "keys": "agent_subtypes"
+    }
+   ],
+   "summary": "Spawn a legendary lord or hero for the selected settlement's owner, or for you."
+  },
+  {
+   "id": "merc",
+   "category": "army",
+   "syntax": [
+    "merc <unit> <source> [count]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "merc ([^ ]+) ([^ ]+)",
+    "merc ([^ ]+) ([^ ]+) (%d+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "unit",
+     "optional": false,
+     "keys": "units"
+    },
+    {
+     "name": "source",
+     "optional": false
+    },
+    {
+     "name": "count",
+     "optional": true
+    }
+   ],
+   "summary": "Add a unit to your faction's mercenary pool.",
+   "details": "Source is the recruitment source key."
+  },
+  {
+   "id": "armyres",
+   "category": "army",
+   "syntax": [
+    "armyres <resource> <factor> <amount>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "armyres (.+) (.+) (.+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "resource",
+     "optional": false,
+     "keys": "pooled_resources"
+    },
+    {
+     "name": "factor",
+     "optional": false
+    },
+    {
+     "name": "amount",
+     "optional": false
+    }
+   ],
+   "summary": "Change a pooled resource of the selected army through a given factor."
+  },
+  {
+   "id": "bbf",
+   "category": "army",
+   "syntax": [
+    "bbf <building>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "bbf (.+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "building",
+     "optional": false,
+     "keys": "buildings"
+    }
+   ],
+   "summary": "Build a building in the selected horde army."
+  },
+  {
+   "id": "under",
+   "category": "settlement",
+   "syntax": [
+    "under <slot set>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "under (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "slot set",
+     "optional": false
+    }
+   ],
+   "summary": "Add a foreign slot set to the selected settlement."
+  },
+  {
+   "id": "runder",
+   "category": "settlement",
+   "syntax": [
+    "runder"
+   ],
+   "aliases": [],
+   "patterns": [
+    "runder"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Remove foreign slots from the selected settlement."
+  },
+  {
+   "id": "bb",
+   "category": "settlement",
+   "syntax": [
+    "bb <building>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "bb (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "building",
+     "optional": false,
+     "keys": "buildings"
+    }
+   ],
+   "summary": "Build a building in the selected settlement."
+  },
+  {
+   "id": "build-mode",
+   "category": "settlement",
+   "syntax": [
+    "build [off]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "build",
+    "build (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "off",
+     "optional": true
+    }
+   ],
+   "summary": "Toggle build mode: clicking a building in the settlement panel builds it.",
+   "details": "Use \"build off\" to turn it off."
+  },
+  {
+   "id": "primary",
+   "category": "settlement",
+   "syntax": [
+    "primary [level]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "primary (%d+)",
+    "primary"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "level",
+     "optional": true
+    }
+   ],
+   "summary": "Set the main building of the selected settlement to a level (default 10)."
+  },
+  {
+   "id": "give-region",
+   "category": "settlement",
+   "syntax": [
+    "gr [faction]",
+    "give region [faction]"
+   ],
+   "aliases": [
+    "give region"
+   ],
+   "patterns": [
+    "give region (.+)",
+    "give region",
+    "gr",
+    "gr (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Give the selected settlement to a faction, default yours."
+  },
+  {
+   "id": "take",
+   "category": "settlement",
+   "syntax": [
+    "take"
+   ],
+   "aliases": [],
+   "patterns": [
+    "take"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Take the selected settlement for your faction.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "abandon",
+   "category": "settlement",
+   "syntax": [
+    "abandon"
+   ],
+   "aliases": [],
+   "patterns": [
+    "abandon"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Abandon the selected settlement."
+  },
+  {
+   "id": "po",
+   "category": "settlement",
+   "syntax": [
+    "po <value>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "po (%-?%d+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "value",
+     "optional": false
+    }
+   ],
+   "summary": "Change public order in the selected settlement."
+  },
+  {
+   "id": "growth",
+   "category": "settlement",
+   "syntax": [
+    "growth <points>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "growth (%-?%d+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "points",
+     "optional": false
+    }
+   ],
+   "summary": "Add growth points to the selected settlement."
+  },
+  {
+   "id": "devpoints",
+   "category": "settlement",
+   "syntax": [
+    "devpoints"
+   ],
+   "aliases": [],
+   "patterns": [
+    "devpoints"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Add one development point to the selected settlement.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "walls",
+   "category": "settlement",
+   "syntax": [
+    "walls <breaches>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "walls (%d+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "breaches",
+     "optional": false
+    }
+   ],
+   "summary": "Set the number of wall breaches in the selected settlement; 0 repairs them."
+  },
+  {
+   "id": "rebel",
+   "category": "settlement",
+   "syntax": [
+    "rebel [units]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rebel",
+    "rebel (%d+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "units",
+     "optional": true
+    }
+   ],
+   "summary": "Start a rebellion in the selected settlement (default 10 units)."
+  },
+  {
+   "id": "healg",
+   "category": "settlement",
+   "syntax": [
+    "healg <percent>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "healg (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "percent",
+     "optional": false
+    }
+   ],
+   "summary": "Heal the garrison of the selected settlement."
+  },
+  {
+   "id": "unloc",
+   "category": "settlement",
+   "syntax": [
+    "unloc <cult>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "unloc (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "cult",
+     "optional": false
+    }
+   ],
+   "summary": "Add a minor cult to the selected settlement."
+  },
+  {
+   "id": "runloc",
+   "category": "settlement",
+   "syntax": [
+    "runloc"
+   ],
+   "aliases": [],
+   "patterns": [
+    "runloc"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Remove the minor cult from the selected settlement."
+  },
+  {
+   "id": "ingred",
+   "category": "settlement",
+   "syntax": [
+    "ingred <ingredient>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "ingred (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "ingredient",
+     "optional": false,
+     "keys": "ingredients"
+    }
+   ],
+   "summary": "Unlock a cooking ingredient for the selected settlement's owner, or for you."
+  },
+  {
+   "id": "alliance",
+   "category": "diplomacy",
+   "syntax": [
+    "alliance [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "alliance",
+    "alliance ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Form an alliance with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "defalliance",
+   "category": "diplomacy",
+   "syntax": [
+    "defalliance [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "defalliance",
+    "defalliance ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Form a defensive alliance with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "defalliance2",
+   "category": "diplomacy",
+   "syntax": [
+    "defalliance2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "defalliance2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Form a defensive alliance between the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "milaccess",
+   "category": "diplomacy",
+   "syntax": [
+    "milaccess [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "milaccess",
+    "milaccess ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Grant military access with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "milaccess2",
+   "category": "diplomacy",
+   "syntax": [
+    "milaccess2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "milaccess2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Grant military access with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "trade",
+   "category": "diplomacy",
+   "syntax": [
+    "trade [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "trade",
+    "trade ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Make a trade agreement with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "trade2",
+   "category": "diplomacy",
+   "syntax": [
+    "trade2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "trade2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Make a trade agreement with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "vassal",
+   "category": "diplomacy",
+   "syntax": [
+    "vassal [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "vassal",
+    "vassal ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Make the target your vassal. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "vassal2",
+   "category": "diplomacy",
+   "syntax": [
+    "vassal2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "vassal2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Make the target your vassal. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "peace",
+   "category": "diplomacy",
+   "syntax": [
+    "peace [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "peace",
+    "peace ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Make peace with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "peace2",
+   "category": "diplomacy",
+   "syntax": [
+    "peace2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "peace2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Make peace with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "war",
+   "category": "diplomacy",
+   "syntax": [
+    "war [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "war",
+    "war ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Declare war on the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "war2",
+   "category": "diplomacy",
+   "syntax": [
+    "war2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "war2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Declare war on the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "confederate",
+   "category": "diplomacy",
+   "syntax": [
+    "confederate [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "confederate",
+    "confederate ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Confederate the target into your faction. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "confederate2",
+   "category": "diplomacy",
+   "syntax": [
+    "confederate2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "confederate2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Confederate the target into your faction. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "nap",
+   "category": "diplomacy",
+   "syntax": [
+    "nap [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "nap",
+    "nap ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Make a non-aggression pact with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "nap2",
+   "category": "diplomacy",
+   "syntax": [
+    "nap2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "nap2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Make a non-aggression pact with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "breaknap",
+   "category": "diplomacy",
+   "syntax": [
+    "breaknap [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breaknap",
+    "breaknap ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Break the non-aggression pact with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "breaknap2",
+   "category": "diplomacy",
+   "syntax": [
+    "breaknap2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breaknap2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Break the non-aggression pact with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "unvassal",
+   "category": "diplomacy",
+   "syntax": [
+    "unvassal [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "unvassal",
+    "unvassal ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Release the target from vassalage. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "nomilaccess",
+   "category": "diplomacy",
+   "syntax": [
+    "nomilaccess [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "nomilaccess",
+    "nomilaccess ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Revoke military access with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "nomilaccess2",
+   "category": "diplomacy",
+   "syntax": [
+    "nomilaccess2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "nomilaccess2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Revoke military access with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "breakalliance",
+   "category": "diplomacy",
+   "syntax": [
+    "breakalliance [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breakalliance",
+    "breakalliance ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Break the alliance with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "breakalliance2",
+   "category": "diplomacy",
+   "syntax": [
+    "breakalliance2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breakalliance2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Break the alliance with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "breaktrade",
+   "category": "diplomacy",
+   "syntax": [
+    "breaktrade [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breaktrade",
+    "breaktrade ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Break the trade agreement with the target. Uses the selected character or settlement, or the faction key if given."
+  },
+  {
+   "id": "breaktrade2",
+   "category": "diplomacy",
+   "syntax": [
+    "breaktrade2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "breaktrade2"
+   ],
+   "target": "diplomacy",
+   "args": [],
+   "summary": "Break the trade agreement with the target. Acts on the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "possess",
+   "category": "diplomacy",
+   "syntax": [
+    "possess [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "possess",
+    "possess ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Toggle human control of the target faction.",
+   "unavailable": true
+  },
+  {
+   "id": "relations",
+   "category": "diplomacy",
+   "syntax": [
+    "relations <amount>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "relations (%-?%d+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "amount",
+     "optional": false
+    }
+   ],
+   "summary": "Adjust relations between your faction and the selected one.",
+   "unavailable": true
+  },
+  {
+   "id": "diplob",
+   "category": "diplomacy",
+   "syntax": [
+    "diplob [bonus]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "diplob",
+    "diplob (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "bonus",
+     "optional": true
+    }
+   ],
+   "summary": "Apply a diplomatic bonus (-6 to 6, default 6) between you and the selected faction."
+  },
+  {
+   "id": "diplob2",
+   "category": "diplomacy",
+   "syntax": [
+    "diplob2 [bonus]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "diplob2",
+    "diplob2 (.+)"
+   ],
+   "target": "diplomacy",
+   "args": [
+    {
+     "name": "bonus",
+     "optional": true
+    }
+   ],
+   "summary": "Apply a diplomatic bonus (-6 to 6, default 6) between the two factions in the open diplomacy screen."
+  },
+  {
+   "id": "diplo",
+   "category": "diplomacy",
+   "syntax": [
+    "diplo"
+   ],
+   "aliases": [],
+   "patterns": [
+    "diplo"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Make diplomacy available between you and every other faction."
+  },
+  {
+   "id": "cinv",
+   "category": "debug",
+   "syntax": [
+    "cinv"
+   ],
+   "aliases": [],
+   "patterns": [
+    "cinv"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Call CI_event(3), a test function defined outside this mod."
+  },
+  {
+   "id": "cinv2",
+   "category": "debug",
+   "syntax": [
+    "cinv2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "cinv2"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Call CI_event(2), a test function defined outside this mod."
+  },
+  {
+   "id": "killf",
+   "category": "diplomacy",
+   "syntax": [
+    "killf [faction]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "killf",
+    "killf (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": true,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Kill a faction: the selected one, or the given key."
+  },
+  {
+   "id": "awake",
+   "category": "diplomacy",
+   "syntax": [
+    "awake <faction>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "awake (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "faction",
+     "optional": false,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Revive a dead faction and confederate it into yours."
+  },
+  {
+   "id": "give-gold",
+   "category": "economy",
+   "syntax": [
+    "gg [amount]",
+    "give gold [amount]"
+   ],
+   "aliases": [
+    "give gold"
+   ],
+   "patterns": [
+    "give gold",
+    "give gold (.+)",
+    "gg",
+    "gg (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "amount",
+     "optional": true
+    }
+   ],
+   "summary": "Add gold (default 50000) to the selected settlement's owner, or to you."
+  },
+  {
+   "id": "rp",
+   "category": "economy",
+   "syntax": [
+    "rp <points>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rp (%d+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "points",
+     "optional": false
+    }
+   ],
+   "summary": "Grant research points."
+  },
+  {
+   "id": "technology",
+   "category": "economy",
+   "syntax": [
+    "technology [value|off]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "technology (.+)",
+    "technology"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "value",
+     "optional": true
+    }
+   ],
+   "summary": "Boost research speed through an effect bundle (default 2000), or remove it with off."
+  },
+  {
+   "id": "tech",
+   "category": "economy",
+   "syntax": [
+    "tech <tech>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "tech (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "tech",
+     "optional": false,
+     "keys": "techs"
+    }
+   ],
+   "summary": "Research a technology."
+  },
+  {
+   "id": "techall",
+   "category": "economy",
+   "syntax": [
+    "techall"
+   ],
+   "aliases": [],
+   "patterns": [
+    "techall"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Research every technology."
+  },
+  {
+   "id": "res",
+   "category": "economy",
+   "syntax": [
+    "res <resource> <amount>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "res (.+) (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "resource",
+     "optional": false,
+     "keys": "pooled_resources"
+    },
+    {
+     "name": "amount",
+     "optional": false
+    }
+   ],
+   "summary": "Add or remove a pooled resource.",
+   "details": "Army, region and faction resources use the selected army or settlement where needed."
+  },
+  {
+   "id": "cres",
+   "category": "economy",
+   "syntax": [
+    "cres <resource> <amount>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "cres ([^ ]+) (%-?%d+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "resource",
+     "optional": false,
+     "keys": "pooled_resources"
+    },
+    {
+     "name": "amount",
+     "optional": false
+    }
+   ],
+   "summary": "Same as res, but only usable in single player.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "other-res",
+   "category": "economy",
+   "syntax": [
+    "other_res <value>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "other_res (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "value",
+     "optional": false
+    }
+   ],
+   "summary": "Adjust the Bretonnian chivalry and Amber event resources."
+  },
+  {
+   "id": "hef-inf",
+   "category": "economy",
+   "syntax": [
+    "hef_inf <value|off>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "hef_inf (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "value",
+     "optional": false
+    }
+   ],
+   "summary": "Boost High Elf influence gain through an effect bundle, or remove it with off."
+  },
+  {
+   "id": "global-rec",
+   "category": "economy",
+   "syntax": [
+    "global rec <value|off>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "global rec (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "value",
+     "optional": false
+    }
+   ],
+   "summary": "Change the global building recruitment duration through an effect bundle, or remove it with off."
+  },
+  {
+   "id": "local-rec",
+   "category": "economy",
+   "syntax": [
+    "local rec <value|off>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "local rec (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "value",
+     "optional": false
+    }
+   ],
+   "summary": "Change the local building recruitment duration through an effect bundle, or remove it with off."
+  },
+  {
+   "id": "give-slaves",
+   "category": "economy",
+   "syntax": [
+    "give slaves [amount]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "give slaves",
+    "give slaves (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "amount",
+     "optional": true
+    }
+   ],
+   "summary": "Add slaves (default 10000) to the selected settlement's province."
+  },
+  {
+   "id": "item",
+   "category": "economy",
+   "syntax": [
+    "item <ancillary>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "item (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ancillary",
+     "optional": false,
+     "keys": "ancillaries"
+    }
+   ],
+   "summary": "Add an ancillary to your faction's inventory."
+  },
+  {
+   "id": "ancies",
+   "category": "economy",
+   "syntax": [
+    "ancies"
+   ],
+   "aliases": [],
+   "patterns": [
+    "ancies"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Add a fixed set of ancillaries to your faction."
+  },
+  {
+   "id": "allancies",
+   "category": "economy",
+   "syntax": [
+    "allancies"
+   ],
+   "aliases": [],
+   "patterns": [
+    "allancies"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Add every ancillary to your faction.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "region",
+   "category": "economy",
+   "syntax": [
+    "region"
+   ],
+   "aliases": [],
+   "patterns": [
+    "region"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Apply a bundle with large province growth, horde growth and faster construction."
+  },
+  {
+   "id": "region-off",
+   "category": "economy",
+   "syntax": [
+    "region off"
+   ],
+   "aliases": [],
+   "patterns": [
+    "region off"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Remove the bundle added by region."
+  },
+  {
+   "id": "prg",
+   "category": "economy",
+   "syntax": [
+    "prg"
+   ],
+   "aliases": [],
+   "patterns": [
+    "prg"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Shortcut: gold, the region bundle and a max main building."
+  },
+  {
+   "id": "eb",
+   "category": "economy",
+   "syntax": [
+    "eb <bundle>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "eb (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "bundle",
+     "optional": false,
+     "keys": "effect_bundles"
+    }
+   ],
+   "summary": "Apply an effect bundle to the open settlement or the selected character."
+  },
+  {
+   "id": "reb",
+   "category": "economy",
+   "syntax": [
+    "reb <bundle>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "reb (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "bundle",
+     "optional": false,
+     "keys": "effect_bundles"
+    }
+   ],
+   "summary": "Remove an effect bundle from the open settlement or the selected character."
+  },
+  {
+   "id": "feb",
+   "category": "economy",
+   "syntax": [
+    "feb <bundle>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "feb (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "bundle",
+     "optional": false,
+     "keys": "effect_bundles"
+    }
+   ],
+   "summary": "Apply an effect bundle to a faction."
+  },
+  {
+   "id": "rfeb",
+   "category": "economy",
+   "syntax": [
+    "rfeb <bundle>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rfeb (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "bundle",
+     "optional": false,
+     "keys": "effect_bundles"
+    }
+   ],
+   "summary": "Remove an effect bundle from a faction."
+  },
+  {
+   "id": "shapeshift",
+   "category": "economy",
+   "syntax": [
+    "shapeshift"
+   ],
+   "aliases": [],
+   "patterns": [
+    "shapeshift"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Unlock all shapeshift forms.",
+   "unavailable": true
+  },
+  {
+   "id": "plagues",
+   "category": "economy",
+   "syntax": [
+    "plagues"
+   ],
+   "aliases": [],
+   "patterns": [
+    "plagues"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Unlock all plagues.",
+   "unavailable": true
+  },
+  {
+   "id": "chaotic-plans",
+   "category": "economy",
+   "syntax": [
+    "chaotic plans"
+   ],
+   "aliases": [],
+   "patterns": [
+    "chaotic plans"
+   ],
+   "target": "faction",
+   "args": [],
+   "summary": "Unlock all Chaotic plan types and shop tokens.",
+   "unavailable": true
+  },
+  {
+   "id": "incident",
+   "category": "events",
+   "syntax": [
+    "incident <incident>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "incident (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "incident",
+     "optional": false,
+     "keys": "incidents"
+    }
+   ],
+   "summary": "Trigger an incident."
+  },
+  {
+   "id": "dilemma",
+   "category": "events",
+   "syntax": [
+    "dilemma <dilemma>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "dilemma (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "dilemma",
+     "optional": false,
+     "keys": "dilemmas"
+    }
+   ],
+   "summary": "Trigger a dilemma."
+  },
+  {
+   "id": "mission",
+   "category": "events",
+   "syntax": [
+    "mission <mission>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "mission (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "mission",
+     "optional": false,
+     "keys": "missions"
+    }
+   ],
+   "summary": "Trigger a mission."
+  },
+  {
+   "id": "complete-mission",
+   "category": "events",
+   "syntax": [
+    "complete mission <mission>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "complete mission (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "mission",
+     "optional": false,
+     "keys": "missions"
+    }
+   ],
+   "summary": "Complete an active mission.",
+   "unavailable": true
+  },
+  {
+   "id": "ritual",
+   "category": "events",
+   "syntax": [
+    "ritual <ritual>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "ritual (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ritual",
+     "optional": false,
+     "keys": "rituals"
+    }
+   ],
+   "summary": "Perform a ritual."
+  },
+  {
+   "id": "unlock-ritual",
+   "category": "events",
+   "syntax": [
+    "unlock ritual <ritual>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "unlock ritual (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ritual",
+     "optional": false,
+     "keys": "rituals"
+    }
+   ],
+   "summary": "Unlock a ritual."
+  },
+  {
+   "id": "reset-ritual",
+   "category": "events",
+   "syntax": [
+    "reset ritual <ritual>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "reset ritual (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ritual",
+     "optional": false,
+     "keys": "rituals"
+    }
+   ],
+   "summary": "Reset a ritual's cooldown.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "dev-unlock-ritual",
+   "category": "events",
+   "syntax": [
+    "dev unlock ritual <ritual>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "dev unlock ritual (.+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ritual",
+     "optional": false,
+     "keys": "rituals"
+    }
+   ],
+   "summary": "Unlock a ritual with the dev unlock mode.",
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "endturn-me",
+   "category": "events",
+   "syntax": [
+    "endturn me"
+   ],
+   "aliases": [],
+   "patterns": [
+    "endturn me"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "End the turn without waiting for AI factions.",
+   "unavailable": true
+  },
+  {
+   "id": "unlock-boris",
+   "category": "events",
+   "syntax": [
+    "unlock boris"
+   ],
+   "aliases": [],
+   "patterns": [
+    "unlock boris"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Award the Boris unlock achievement."
+  },
+  {
+   "id": "fow-off",
+   "category": "map",
+   "syntax": [
+    "fff",
+    "fow off"
+   ],
+   "aliases": [
+    "fow off"
+   ],
+   "patterns": [
+    "fow off",
+    "fff"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Turn the fog of war off."
+  },
+  {
+   "id": "fow-on",
+   "category": "map",
+   "syntax": [
+    "fon",
+    "fow on"
+   ],
+   "aliases": [
+    "fow on"
+   ],
+   "patterns": [
+    "fow on",
+    "fon"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Turn the fog of war back on."
+  },
+  {
+   "id": "shroud2",
+   "category": "map",
+   "syntax": [
+    "shroud2"
+   ],
+   "aliases": [],
+   "patterns": [
+    "shroud2"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Mark every region as seen."
+  },
+  {
+   "id": "export-map",
+   "category": "map",
+   "syntax": [
+    "export map"
+   ],
+   "aliases": [],
+   "patterns": [
+    "export map"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Write region data of the map to map_out.json."
+  },
+  {
+   "id": "info",
+   "category": "debug",
+   "syntax": [
+    "info"
+   ],
+   "aliases": [],
+   "patterns": [
+    "info"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle printing info about the current selection."
+  },
+  {
+   "id": "more-info",
+   "category": "debug",
+   "syntax": [
+    "more info"
+   ],
+   "aliases": [],
+   "patterns": [
+    "more info"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle printing extra info about the current selection."
+  },
+  {
+   "id": "coords",
+   "category": "debug",
+   "syntax": [
+    "coords"
+   ],
+   "aliases": [],
+   "patterns": [
+    "coords"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle printing map coordinates."
+  },
+  {
+   "id": "comps",
+   "category": "debug",
+   "syntax": [
+    "comps"
+   ],
+   "aliases": [],
+   "patterns": [
+    "comps"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle printing the UI component you click."
+  },
+  {
+   "id": "log-faction-turns",
+   "category": "debug",
+   "syntax": [
+    "log_faction_turns"
+   ],
+   "aliases": [],
+   "patterns": [
+    "log_faction_turns"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle logging of faction turns."
+  },
+  {
+   "id": "lua",
+   "category": "debug",
+   "syntax": [
+    "lua <code>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "lua (.+)"
+   ],
+   "target": "none",
+   "args": [
+    {
+     "name": "code",
+     "optional": false
+    }
+   ],
+   "summary": "Run a line of Lua code. Semicolons are not treated as separators."
+  },
+  {
+   "id": "e",
+   "category": "debug",
+   "syntax": [
+    "e"
+   ],
+   "aliases": [],
+   "patterns": [
+    "e"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Run exec.lua from the WH3 folder."
+  },
+  {
+   "id": "ee",
+   "category": "debug",
+   "syntax": [
+    "ee"
+   ],
+   "aliases": [],
+   "patterns": [
+    "ee"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Run exec2.lua from the WH3 folder."
+  },
+  {
+   "id": "dump-ui",
+   "category": "debug",
+   "syntax": [
+    "dump ui [delay]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "dump ui",
+    "dump ui (%d+)"
+   ],
+   "target": "none",
+   "args": [
+    {
+     "name": "delay",
+     "optional": true
+    }
+   ],
+   "summary": "Print the UI component tree, optionally after a delay."
+  },
+  {
+   "id": "show-css",
+   "category": "debug",
+   "syntax": [
+    "show css"
+   ],
+   "aliases": [],
+   "patterns": [
+    "show css"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle the main button of the PJ_SS mod."
+  },
+  {
+   "id": "show-mp",
+   "category": "debug",
+   "syntax": [
+    "show mp"
+   ],
+   "aliases": [],
+   "patterns": [
+    "show mp"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Toggle the main button of the PJ_MAP_MAKER mod."
+  },
+  {
+   "id": "building-test",
+   "category": "debug",
+   "syntax": [
+    "building test <faction>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "building test (.+)"
+   ],
+   "target": "none",
+   "args": [
+    {
+     "name": "faction",
+     "optional": false,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Run the building test for a faction."
+  },
+  {
+   "id": "chain",
+   "category": "console",
+   "syntax": [
+    "<cmd>; <cmd>; ..."
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [],
+   "summary": "Run several commands on one line, separated by semicolons.",
+   "details": "A line starting with \"lua \" is not split.",
+   "examples": [
+    "gg; eb wh_main_effect_force_all_campaign_movement_range"
+   ]
+  },
+  {
+   "id": "alias",
+   "category": "console",
+   "syntax": [
+    "alias <name> = <cmd>; <cmd>"
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [
+    {
+     "name": "name",
+     "optional": false
+    },
+    {
+     "name": "cmd",
+     "optional": false
+    }
+   ],
+   "summary": "Save a shortcut for one or more commands.",
+   "details": "Aliases are stored in pj_console_aliases.txt and can use other aliases.",
+   "examples": [
+    "alias rich = gg 100000; techall"
+   ]
+  },
+  {
+   "id": "unalias",
+   "category": "console",
+   "syntax": [
+    "unalias <name>"
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [
+    {
+     "name": "name",
+     "optional": false
+    }
+   ],
+   "summary": "Delete an alias."
+  },
+  {
+   "id": "aliases",
+   "category": "console",
+   "syntax": [
+    "aliases"
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [],
+   "summary": "List your aliases."
+  },
+  {
+   "id": "run",
+   "category": "console",
+   "syntax": [
+    "run <file>"
+   ],
+   "aliases": [],
+   "patterns": [],
+   "target": "none",
+   "args": [
+    {
+     "name": "file",
+     "optional": false
+    }
+   ],
+   "summary": "Run commands from a text file, one per line.",
+   "details": "The path is relative to the WH3 folder. Empty lines and lines starting with # or -- are skipped."
+  },
+  {
+   "id": "clear",
+   "category": "console",
+   "syntax": [
+    "clear",
+    "cls"
+   ],
+   "aliases": [
+    "cls"
+   ],
+   "patterns": [],
+   "target": "none",
+   "args": [],
+   "summary": "Clear the console output."
+  }
+ ]
+}

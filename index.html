@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pj_console commands</title>
+<meta name="description" content="Command reference and key lookup for the pj_console campaign mod for Total War: Warhammer III.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Red+Hat+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e2530'/%3E%3Cpath d='M8 10l7 6-7 6' stroke='%23d2a24c' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h8' stroke='%235fb39b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="module" src="assets/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#commands">Skip to commands</a>
+
+<header class="masthead wrap">
+  <div class="brand">
+    <h1>pj_console</h1>
+    <p class="lede">A campaign console for Total War: Warhammer III. Open it with the <b>Console Commands</b> button in the campaign menu bar, type a command and press Enter.</p>
+  </div>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#commands">Commands</a>
+    <a href="#keys">Keys</a>
+    <a href="#features">Console features</a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="console-stage" id="console" aria-labelledby="console-title">
+    <div class="wrap">
+      <h2 id="console-title" class="visually-hidden">Try a command</h2>
+      <div class="console">
+        <div class="console-bar">
+          <label for="console-input" class="console-label">Build a command, then copy it into the game</label>
+          <button type="button" id="console-copy" class="btn-copy">Copy</button>
+        </div>
+        <div class="console-field">
+          <span class="prompt" aria-hidden="true">&gt;</span>
+          <input id="console-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="console-suggest"
+                 placeholder="au wh_main_emp_inf_swordsmen 3">
+        </div>
+        <ul id="console-suggest" class="suggest" role="listbox" aria-label="Suggestions" hidden></ul>
+        <div id="console-hint" class="hint" aria-live="polite"></div>
+      </div>
+      <p class="console-help">Tab or Enter accepts a suggestion, ↑ ↓ moves through them. Separate several commands with <code>;</code>. Keys come from the base game, so modded units and bundles won't be listed, but the console still accepts them.</p>
+    </div>
+  </section>
+
+  <section class="block" id="commands" aria-labelledby="commands-title">
+    <div class="wrap">
+      <div class="block-head">
+        <h2 id="commands-title">Commands</h2>
+        <p>Most commands act on whatever you have selected on the campaign map: a character, a settlement or a faction. Click a row for arguments and examples.</p>
+      </div>
+      <div class="filters">
+        <input id="cmd-search" class="search" type="search" placeholder="Search commands, e.g. skill, gold, ritual" aria-label="Search commands">
+        <div id="cmd-cats" class="chips" role="group" aria-label="Filter by category"></div>
+      </div>
+      <div id="cmd-list" class="cmd-list"></div>
+      <p id="cmd-empty" class="empty" hidden>No command matches that search. Try a shorter word, or search the key list below if you're looking for a game key.</p>
+    </div>
+  </section>
+
+  <section class="block" id="keys" aria-labelledby="keys-title">
+    <div class="wrap">
+      <div class="block-head">
+        <h2 id="keys-title">Keys</h2>
+        <p>Database keys from the base game, the values commands like <code>au</code>, <code>eb</code> or <code>skill</code> expect. Click a key to copy it.</p>
+      </div>
+      <div class="filters key-filters">
+        <select id="key-source" class="select" aria-label="Key type"></select>
+        <input id="key-filter" class="search" type="search" placeholder="Filter by key or in-game name" aria-label="Filter keys">
+        <span id="key-count" class="count" aria-live="polite"></span>
+      </div>
+      <ul id="key-list" class="key-list"></ul>
+      <button type="button" id="key-more" class="btn-more" hidden>Show more</button>
+    </div>
+  </section>
+
+  <section class="block" id="features" aria-labelledby="features-title">
+    <div class="wrap prose">
+      <div class="block-head">
+        <h2 id="features-title">Console features</h2>
+        <p>Handled by the console box itself, before anything reaches the game.</p>
+      </div>
+
+      <h3>Several commands on one line</h3>
+      <p>Separate commands with a semicolon. They run in order.</p>
+      <pre><code>gg 100000; rp 5000; fff</code></pre>
+      <p>A line that starts with <code>lua</code> is never split, so Lua code can use semicolons freely.</p>
+
+      <h3>Aliases</h3>
+      <p>Give a name to a command or a whole chain. Aliases can call other aliases, up to five levels deep.</p>
+      <pre><code>alias rich = gg 500000; rp 20000
+rich
+aliases
+unalias rich</code></pre>
+      <p>Aliases are saved to <code>pj_console_aliases.txt</code> next to the game executable, so they carry over between campaigns.</p>
+
+      <h3>Command files</h3>
+      <p><code>run &lt;file&gt;</code> runs every line of a text file as if you typed it. The path is relative to the Warhammer III folder. Blank lines and lines starting with <code>#</code> or <code>--</code> are skipped, and a file can <code>run</code> other files.</p>
+      <pre><code># my_start.txt
+fff
+gg 200000
+techall</code></pre>
+      <pre><code>run my_start.txt</code></pre>
+
+      <h3>History and output</h3>
+      <p>↑ and ↓ in the console box step through your last 50 commands, which are kept in <code>pj_console_history.txt</code>. <code>clear</code> or <code>cls</code> empties the output panel.</p>
+
+      <h3>Context menus</h3>
+      <p>The Global, Character, Settlement and Faction buttons next to the console box list the common commands for the current selection. Entries without arguments run on click. The others put the command in the box and, where it takes a key, show suggestions.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p id="dump-meta"></p>
+    <p>pj_console is a campaign mod for Total War: Warhammer III. Commands marked SP only refuse to run in multiplayer.</p>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

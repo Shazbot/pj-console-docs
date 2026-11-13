@@ -1,0 +1,41 @@
+{
+ "dumpCommit": "773b6d85b429c2b4b48e235ec8c3d33b273af5cf",
+ "dumpDate": "2026-11-04",
+ "builtAt": "2026-11-13T13:23:48.671Z",
+ "counts": {
+  "agent_subtypes": 662,
+  "agents": 9,
+  "ancillaries": 2874,
+  "buildings": 5686,
+  "dilemmas": 1167,
+  "effect_bundles": 6782,
+  "factions": 739,
+  "incidents": 1832,
+  "ingredients": 43,
+  "missions": 3350,
+  "pooled_resources": 278,
+  "rituals": 1473,
+  "skills": 6553,
+  "techs": 2098,
+  "traits": 790,
+  "units": 2802
+ },
+ "named": {
+  "agent_subtypes": 573,
+  "agents": 0,
+  "ancillaries": 2638,
+  "buildings": 5268,
+  "dilemmas": 955,
+  "effect_bundles": 4870,
+  "factions": 714,
+  "incidents": 1701,
+  "ingredients": 43,
+  "missions": 2853,
+  "pooled_resources": 222,
+  "rituals": 1298,
+  "skills": 5933,
+  "techs": 2004,
+  "traits": 708,
+  "units": 2632
+ }
+}
