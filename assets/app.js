@@ -1,4 +1,5 @@
 import { parseLine, buildIndex, complete, matchCommand } from './complete.js';
+import { initTheme } from './theme.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -7,6 +8,7 @@ const SOURCE_LABELS = {
   incidents: 'Incidents', dilemmas: 'Dilemmas', missions: 'Missions', rituals: 'Rituals', factions: 'Factions',
   agents: 'Agents', agent_subtypes: 'Agent subtypes', buildings: 'Buildings', ingredients: 'Ingredients',
   effect_bundles: 'Effect bundles', pooled_resources: 'Pooled resources',
+  recruitment_sources: 'Recruitment sources', slot_sets: 'Slot sets', minor_cults: 'Minor cults',
 };
 const TARGET_LABELS = { character: 'Character', army: 'Army', settlement: 'Settlement', faction: 'Faction', diplomacy: 'Diplomacy' };
 const reduceMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -57,21 +59,6 @@ async function copy(text, label) {
     ta.remove();
   }
   toast(`Copied ${label ?? text}`);
-}
-
-// ---------- theme ----------
-function initTheme() {
-  const root = document.documentElement;
-  try {
-    const saved = localStorage.getItem('pjc-theme');
-    if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
-  } catch { /* ignore */ }
-  document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.addEventListener('click', () => {
-    const cur = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    const next = cur === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('pjc-theme', next); } catch { /* ignore */ }
-  }));
 }
 
 // ---------- console ----------

@@ -1,7 +1,7 @@
 {
  "dumpCommit": "773b6d85b429c2b4b48e235ec8c3d33b273af5cf",
  "dumpDate": "2026-11-04",
- "builtAt": "2026-11-13T13:40:38.653Z",
+ "builtAt": "2026-11-13T14:12:33.736Z",
  "counts": {
   "agent_subtypes": 662,
   "agents": 9,
@@ -12,10 +12,13 @@
   "factions": 739,
   "incidents": 1832,
   "ingredients": 43,
+  "minor_cults": 40,
   "missions": 3350,
   "pooled_resources": 278,
+  "recruitment_sources": 34,
   "rituals": 1473,
   "skills": 6553,
+  "slot_sets": 85,
   "techs": 2098,
   "traits": 790,
   "units": 2802
@@ -30,10 +33,13 @@
   "factions": 714,
   "incidents": 1701,
   "ingredients": 43,
+  "minor_cults": 0,
   "missions": 2853,
   "pooled_resources": 222,
+  "recruitment_sources": 0,
   "rituals": 1298,
   "skills": 5933,
+  "slot_sets": 0,
   "techs": 2004,
   "traits": 708,
   "units": 2632

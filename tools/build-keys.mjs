@@ -90,6 +90,8 @@ const simple = {
   ingredients: ['cooking_ingredients_tables', 'key', 'cooking_ingredients', 'cooking_ingredients_display_text_'],
   effect_bundles: ['effect_bundles_tables', 'key', 'effect_bundles', 'effect_bundles_localised_title_'],
   pooled_resources: ['pooled_resources_tables', 'key', 'pooled_resources', 'pooled_resources_display_name_'],
+  slot_sets: ['slot_sets_tables', 'key', null, null],
+  recruitment_sources: ['recruitment_sources_tables', 'key', null, null],
 };
 
 const sources = {};
@@ -97,6 +99,20 @@ const sources = {};
 for (const [src, [table, col, locName, prefix]] of Object.entries(simple)) {
   const L = locName ? loc(locName) : null;
   sources[src] = readTable(table).map((r) => [r[col], L ? L.get(prefix + r[col]) : undefined]);
+}
+
+// Minor cults have no DB table; the game defines them in MINOR_CULT_LIST (same source the mod reads).
+{
+  const f = path.join(dump, 'script', 'campaign', 'wh3_campaign_minor_cults.lua');
+  if (!fs.existsSync(f)) { console.warn('warn: missing wh3_campaign_minor_cults.lua'); sources.minor_cults = []; }
+  else {
+    const lua = fs.readFileSync(f, 'utf8');
+    const start = lua.indexOf('MINOR_CULT_LIST');
+    const end = lua.indexOf('\n}', start);
+    const block = start >= 0 ? lua.slice(start, end < 0 ? undefined : end) : '';
+    sources.minor_cults = [...block.matchAll(/\{\s*key\s*=\s*"([^"]+)"/g)].map((m) => [m[1], undefined]);
+    if (!sources.minor_cults.length) console.warn('warn: no minor cults parsed');
+  }
 }
 
 // units

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pj_console changelog</title>
+<meta name="description" content="What changed in each pj_console update.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Red+Hat+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231e2530'/%3E%3Cpath d='M8 10l7 6-7 6' stroke='%23d2a24c' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h8' stroke='%235fb39b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="module">import { initTheme } from './assets/theme.js'; initTheme();</script>
+</head>
+<body>
+<a class="skip" href="#changes">Skip to changes</a>
+
+<header class="masthead wrap">
+  <div class="brand">
+    <h1><a href="./" class="home-link">pj_console</a></h1>
+    <p class="lede">What changed in each update. Command names link to their entry in the reference.</p>
+  </div>
+  <nav class="topnav" aria-label="Sections">
+    <a href="./#commands">Commands</a>
+    <a href="./#keys">Keys</a>
+    <a href="./#features">Console features</a>
+    <a href="changelog.html" aria-current="page">Changelog</a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="changes" class="changelog wrap">
+
+  <article class="release" aria-labelledby="release-latest">
+    <header class="release-head">
+      <h2 id="release-latest"><time datetime="2026-11-13T15:11+01:00">13 Nov 2026, 3:11 pm</time></h2>
+      <p>A rebuilt console box, command buttons for whatever you have selected, and a batch of new commands.</p>
+    </header>
+
+    <section class="change-group" aria-labelledby="cg-console">
+      <h3 id="cg-console">Console</h3>
+      <ul class="changes">
+        <li>Press <b>Enter</b> to run a command.</li>
+        <li>Use <b>Up/Down</b> to bring back your last 50 commands, even after restarting the game.</li>
+        <li>Run several commands at once by separating them with <code>;</code>.</li>
+        <li>Create your own shortcuts:
+          <ul>
+            <li><a class="cmd-ref" href="./#cmd-alias"><code>alias name = command1; command2</code></a> creates one.</li>
+            <li><a class="cmd-ref" href="./#cmd-unalias"><code>unalias name</code></a> deletes one.</li>
+            <li><a class="cmd-ref" href="./#cmd-aliases"><code>aliases</code></a> lists them all.</li>
+          </ul>
+        </li>
+        <li><a class="cmd-ref" href="./#cmd-clear"><code>clear</code></a> / <code>cls</code> clears the console messages.</li>
+        <li><a class="cmd-ref" href="./#cmd-run"><code>run &lt;file&gt;</code></a> runs every command in a text file from your Warhammer 3 folder. Lines starting with <code>#</code> or <code>--</code> are ignored.</li>
+        <li>You can drag the console anywhere on screen, and it remembers its position.</li>
+        <li>A message area under the console shows what you ran, errors, and a notice when a command isn't recognised.</li>
+      </ul>
+    </section>
+
+    <section class="change-group" aria-labelledby="cg-buttons">
+      <h3 id="cg-buttons">Command buttons</h3>
+      <ul class="changes">
+        <li>New <b>Global</b>, <b>Character</b>, <b>Settlement</b> and <b>Faction</b> buttons under the console. Each one opens a list of commands for what you have selected.
+          <ul>
+            <li>Commands that need nothing else run straight away.</li>
+            <li>The rest are filled into the console for you to finish.</li>
+          </ul>
+        </li>
+        <li>Hover a button to see which character, settlement or faction it will affect.</li>
+        <li>For commands that need a unit, trait, building, faction and so on, a searchable list opens.
+          <ul>
+            <li>Type to filter the list and use Previous/Next to page through it.</li>
+            <li>Names are shown alongside keys.</li>
+            <li>Items added by other mods are included.</li>
+            <li>Commands that need more than one key show a list for each in turn, e.g. <a class="cmd-ref" href="./#cmd-merc"><code>merc</code></a> lists units and then recruitment sources, <a class="cmd-ref" href="./#cmd-spawn"><code>spawn</code></a> lists characters and then factions, and <a class="cmd-ref" href="./#cmd-agent"><code>agent</code></a> lists agent types and then subtypes. Close the list to skip an optional one.</li>
+            <li>Foreign slots (<a class="cmd-ref" href="./#cmd-under"><code>under</code></a>) and Minor cult (<a class="cmd-ref" href="./#cmd-unloc"><code>unloc</code></a>) also have a list.</li>
+          </ul>
+        </li>
+        <li>New <b>Diplomacy with faction</b> button in the Global menu: pick an action, such as war, alliance or confederation, then any faction.</li>
+        <li>New <b>Kill faction</b> button in the Global menu, to pick any faction to destroy (<a class="cmd-ref" href="./#cmd-killf"><code>killf</code></a>).</li>
+        <li>New <b>Character to pool</b> button in the Global menu, to add any character to your recruitment pool (<a class="cmd-ref" href="./#cmd-to-pool"><code>to_pool</code></a>).</li>
+        <li><b>Spawn army</b> is now also in the Character menu, to spawn an army next to the selected character.</li>
+      </ul>
+    </section>
+
+    <section class="change-group" aria-labelledby="cg-commands">
+      <h3 id="cg-commands">Commands</h3>
+      <ul class="changes">
+        <li><a class="cmd-ref" href="./#cmd-confederate"><code>confederate</code></a> / <a class="cmd-ref" href="./#cmd-confederate2"><code>confederate2</code></a> now work between factions that normally can't confederate, and tell you whether it worked.</li>
+        <li><a class="cmd-ref" href="./#cmd-add-unit"><code>au</code></a> / <code>add unit</code> can now set the unit's rank.</li>
+        <li>Diplomacy commands (<a class="cmd-ref" href="./#cmd-confederate"><code>confederate</code></a>, <a class="cmd-ref" href="./#cmd-war"><code>war</code></a>, <a class="cmd-ref" href="./#cmd-alliance"><code>alliance</code></a>, <a class="cmd-ref" href="./#cmd-nap"><code>nap</code></a>, <a class="cmd-ref" href="./#cmd-breaktrade"><code>breaktrade</code></a> and others) can now target a faction by key.</li>
+        <li>New character, settlement, event, ritual and diplomacy commands, including forcing an alliance or trade agreement to break.</li>
+        <li>New single-player cheats:
+          <dl class="cheat-list">
+            <dt><a class="cmd-ref" href="./#cmd-all-skills"><code>allskills</code></a></dt><dd>Max out all skills of the selected character.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-armory"><code>armory</code></a></dt><dd>Unlock every armory item the selected character can use.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-rankup"><code>rankup [n]</code></a></dt><dd>Give the selected character extra ranks.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-allancies"><code>allancies</code></a></dt><dd>Give your faction every ancillary.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-reset-ritual"><code>reset ritual &lt;ritual&gt;</code></a></dt><dd>Reset a ritual's cooldown.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-dev-unlock-ritual"><code>dev unlock ritual &lt;ritual&gt;</code></a></dt><dd>Unlock a ritual.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-take"><code>take</code></a></dt><dd>Take the selected settlement.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-hordegrowth"><code>hordegrowth &lt;points&gt;</code></a> / <a class="cmd-ref" href="./#cmd-hordedev"><code>hordedev</code></a></dt><dd>Grow the selected horde.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-devpoints"><code>devpoints</code></a></dt><dd>Add a development point to the selected settlement's province.</dd>
+            <dt><a class="cmd-ref" href="./#cmd-cres"><code>cres &lt;resource&gt; &lt;amount&gt;</code></a></dt><dd>Add any faction resource.</dd>
+          </dl>
+        </li>
+      </ul>
+    </section>
+
+    <section class="change-group" aria-labelledby="cg-fixes">
+      <h3 id="cg-fixes">Fixes</h3>
+      <ul class="changes changes-fixes">
+        <li>Some commands, such as <a class="cmd-ref" href="./#cmd-add-unit"><code>au</code></a> and <a class="cmd-ref" href="./#cmd-add-trait"><code>at</code></a> with extra numbers, no longer run twice.</li>
+        <li><a class="cmd-ref" href="./#cmd-eb"><code>eb</code></a> / <a class="cmd-ref" href="./#cmd-reb"><code>reb</code></a> no longer affect the previously selected character.</li>
+        <li><a class="cmd-ref" href="./#cmd-diplob2"><code>diplob2</code></a> works again.</li>
+        <li>Several faction and settlement commands no longer fail when no settlement is selected.</li>
+        <li><a class="cmd-ref" href="./#cmd-res"><code>res</code></a> now adds the correct amount.</li>
+      </ul>
+    </section>
+  </article>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p><a href="./">Command reference</a></p>
+    <p>pj_console is a campaign mod for Total War: Warhammer III.</p>
+  </div>
+</footer>
+</body>
+</html>

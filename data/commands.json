@@ -729,7 +729,8 @@
     },
     {
      "name": "source",
-     "optional": false
+     "optional": false,
+     "keys": "recruitment_sources"
     },
     {
      "name": "count",
@@ -801,7 +802,8 @@
    "args": [
     {
      "name": "slot set",
-     "optional": false
+     "optional": false,
+     "keys": "slot_sets"
     }
    ],
    "summary": "Add a foreign slot set to the selected settlement."
@@ -1061,7 +1063,8 @@
    "args": [
     {
      "name": "cult",
-     "optional": false
+     "optional": false,
+     "keys": "minor_cults"
     }
    ],
    "summary": "Add a minor cult to the selected settlement."
