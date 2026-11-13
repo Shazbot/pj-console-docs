@@ -16,9 +16,10 @@ const scrollTo = (el, block = 'start') => el.scrollIntoView({ block, behavior: r
 const keyPromises = new Map();
 const keyData = new Map();
 const keyListeners = [];
+let keyVersion = ''; // dump commit, so key files are refetched only when the dump changes
 function loadKeys(src) {
   if (!keyPromises.has(src)) {
-    keyPromises.set(src, fetch(`keys/${src}.json`).then((r) => {
+    keyPromises.set(src, fetch(`keys/${src}.json${keyVersion}`).then((r) => {
       if (!r.ok) throw new Error(`keys/${src}.json: ${r.status}`);
       return r.json();
     }).then((d) => { keyData.set(src, d); return d; }));
@@ -294,9 +295,11 @@ function initKeyBrowser(meta) {
 async function boot() {
   initTheme();
   const [doc, meta] = await Promise.all([
-    fetch('data/commands.json').then((r) => r.json()),
-    fetch('keys/meta.json').then((r) => r.json()),
+    // revalidate every load (cheap 304) so a redeploy shows up without waiting out Pages' 10 min cache
+    fetch('data/commands.json', { cache: 'no-cache' }).then((r) => r.json()),
+    fetch('keys/meta.json', { cache: 'no-cache' }).then((r) => r.json()),
   ]);
+  keyVersion = meta.dumpCommit ? `?v=${meta.dumpCommit.slice(0, 7)}` : '';
   const index = buildIndex(doc.commands);
   const keyApi = initKeyBrowser(meta);
   const consoleApi = initConsole(doc.commands, index);
