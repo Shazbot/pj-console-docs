@@ -571,42 +571,6 @@
    "singlePlayerOnly": true
   },
   {
-   "id": "winstreak",
-   "category": "character",
-   "syntax": [
-    "winstreak [off]"
-   ],
-   "aliases": [],
-   "patterns": [
-    "winstreak",
-    "winstreak (off)"
-   ],
-   "target": "army",
-   "args": [
-    {
-     "name": "off",
-     "optional": true
-    }
-   ],
-   "summary": "Raise the win streak of the selected army, or lower it with off.",
-   "unavailable": true
-  },
-  {
-   "id": "reroll-init",
-   "category": "character",
-   "syntax": [
-    "reroll init"
-   ],
-   "aliases": [],
-   "patterns": [
-    "reroll init"
-   ],
-   "target": "character",
-   "args": [],
-   "summary": "Reroll the selected character's initiatives.",
-   "unavailable": true
-  },
-  {
    "id": "heal",
    "category": "army",
    "syntax": [
@@ -1599,48 +1563,6 @@
    "summary": "Break the trade agreement with the target. Acts on the two factions in the open diplomacy screen."
   },
   {
-   "id": "possess",
-   "category": "diplomacy",
-   "syntax": [
-    "possess [faction]"
-   ],
-   "aliases": [],
-   "patterns": [
-    "possess",
-    "possess ([^ ]+)"
-   ],
-   "target": "faction",
-   "args": [
-    {
-     "name": "faction",
-     "optional": true,
-     "keys": "factions"
-    }
-   ],
-   "summary": "Toggle human control of the target faction.",
-   "unavailable": true
-  },
-  {
-   "id": "relations",
-   "category": "diplomacy",
-   "syntax": [
-    "relations <amount>"
-   ],
-   "aliases": [],
-   "patterns": [
-    "relations (%-?%d+)"
-   ],
-   "target": "faction",
-   "args": [
-    {
-     "name": "amount",
-     "optional": false
-    }
-   ],
-   "summary": "Adjust relations between your faction and the selected one.",
-   "unavailable": true
-  },
-  {
    "id": "diplob",
    "category": "diplomacy",
    "syntax": [
@@ -2179,51 +2101,6 @@
    "summary": "Remove an effect bundle from a faction."
   },
   {
-   "id": "shapeshift",
-   "category": "economy",
-   "syntax": [
-    "shapeshift"
-   ],
-   "aliases": [],
-   "patterns": [
-    "shapeshift"
-   ],
-   "target": "faction",
-   "args": [],
-   "summary": "Unlock all shapeshift forms.",
-   "unavailable": true
-  },
-  {
-   "id": "plagues",
-   "category": "economy",
-   "syntax": [
-    "plagues"
-   ],
-   "aliases": [],
-   "patterns": [
-    "plagues"
-   ],
-   "target": "faction",
-   "args": [],
-   "summary": "Unlock all plagues.",
-   "unavailable": true
-  },
-  {
-   "id": "chaotic-plans",
-   "category": "economy",
-   "syntax": [
-    "chaotic plans"
-   ],
-   "aliases": [],
-   "patterns": [
-    "chaotic plans"
-   ],
-   "target": "faction",
-   "args": [],
-   "summary": "Unlock all Chaotic plan types and shop tokens.",
-   "unavailable": true
-  },
-  {
    "id": "incident",
    "category": "events",
    "syntax": [
@@ -2282,27 +2159,6 @@
     }
    ],
    "summary": "Trigger a mission."
-  },
-  {
-   "id": "complete-mission",
-   "category": "events",
-   "syntax": [
-    "complete mission <mission>"
-   ],
-   "aliases": [],
-   "patterns": [
-    "complete mission (.+)"
-   ],
-   "target": "faction",
-   "args": [
-    {
-     "name": "mission",
-     "optional": false,
-     "keys": "missions"
-    }
-   ],
-   "summary": "Complete an active mission.",
-   "unavailable": true
   },
   {
    "id": "ritual",
@@ -2385,21 +2241,6 @@
    ],
    "summary": "Unlock a ritual with the dev unlock mode.",
    "singlePlayerOnly": true
-  },
-  {
-   "id": "endturn-me",
-   "category": "events",
-   "syntax": [
-    "endturn me"
-   ],
-   "aliases": [],
-   "patterns": [
-    "endturn me"
-   ],
-   "target": "none",
-   "args": [],
-   "summary": "End the turn without waiting for AI factions.",
-   "unavailable": true
   },
   {
    "id": "unlock-boris",
