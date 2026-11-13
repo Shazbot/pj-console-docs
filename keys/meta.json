@@ -1,7 +1,7 @@
 {
- "dumpCommit": "773b6d85b429c2b4b48e235ec8c3d33b273af5cf",
- "dumpDate": "2026-11-04",
- "builtAt": "2026-11-13T20:02:02.614Z",
+ "dumpCommit": "unknown",
+ "dumpDate": "",
+ "builtAt": "2026-11-13T21:50:57.777Z",
  "counts": {
   "agent_subtypes": 662,
   "agents": 9,
@@ -21,6 +21,7 @@
   "slot_sets": 85,
   "techs": 2098,
   "traits": 790,
+  "unique_agents": 63,
   "units": 2802
  },
  "named": {
@@ -42,6 +43,7 @@
   "slot_sets": 0,
   "techs": 2004,
   "traits": 708,
+  "unique_agents": 46,
   "units": 2632
  }
 }

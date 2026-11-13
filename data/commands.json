@@ -704,7 +704,7 @@
     {
      "name": "subtype",
      "optional": false,
-     "keys": "agent_subtypes"
+     "keys": "unique_agents"
     }
    ],
    "summary": "Spawn a legendary lord or hero for the selected settlement's owner, or for you."

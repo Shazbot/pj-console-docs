@@ -87,6 +87,8 @@ const simple = {
   factions: ['factions_tables', 'key', 'factions', 'factions_screen_name_'],
   agents: ['agents_tables', 'key', null, null],
   agent_subtypes: ['agent_subtypes_tables', 'key', 'agent_subtypes', 'agent_subtypes_onscreen_name_override_'],
+  // legend spawns from unique_agents_tables, keyed by agent subtype
+  unique_agents: ['unique_agents_tables', 'agent_subtype', 'agent_subtypes', 'agent_subtypes_onscreen_name_override_'],
   ingredients: ['cooking_ingredients_tables', 'key', 'cooking_ingredients', 'cooking_ingredients_display_text_'],
   effect_bundles: ['effect_bundles_tables', 'key', 'effect_bundles', 'effect_bundles_localised_title_'],
   pooled_resources: ['pooled_resources_tables', 'key', 'pooled_resources', 'pooled_resources_display_name_'],
