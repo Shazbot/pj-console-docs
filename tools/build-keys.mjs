@@ -94,6 +94,8 @@ const simple = {
   pooled_resources: ['pooled_resources_tables', 'key', 'pooled_resources', 'pooled_resources_display_name_'],
   slot_sets: ['slot_sets_tables', 'key', null, null],
   recruitment_sources: ['recruitment_sources_tables', 'key', null, null],
+  climates: ['settlement_climate_types_tables', 'type', 'settlement_climate_types', 'settlement_climate_types_ui_name_'],
+  spawnable_forces: ['spawnable_forces_tables', 'key', 'spawnable_forces', 'spawnable_forces_display_name_'],
 };
 
 const sources = {};

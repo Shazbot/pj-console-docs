@@ -145,7 +145,95 @@
      "optional": false
     }
    ],
-   "summary": "Set the selected character to a rank."
+   "summary": "Set the selected character to an exact rank, lowering it if needed.",
+   "details": "Skills are kept. Use rank <rank> reset to also reset the skills.",
+   "examples": [
+    "rank 10"
+   ]
+  },
+  {
+   "id": "rank-reset",
+   "category": "character",
+   "syntax": [
+    "rank <rank> reset"
+   ],
+   "aliases": [],
+   "patterns": [
+    "rank (%d+) reset"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "rank",
+     "optional": false
+    }
+   ],
+   "summary": "Set the selected character to an exact rank and reset their skills.",
+   "details": "Same as rank, but the skill points are refunded so they can be spent again.",
+   "examples": [
+    "rank 5 reset"
+   ]
+  },
+  {
+   "id": "skillpoint",
+   "category": "character",
+   "syntax": [
+    "skillpoint <skill>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "skillpoint ([^ ]+)"
+   ],
+   "target": "character",
+   "args": [
+    {
+     "name": "skill",
+     "optional": false,
+     "keys": "skills"
+    }
+   ],
+   "summary": "Add a skill point to the selected character.",
+   "details": "Adds the point to the character details, so it works for skills the character could not otherwise take.",
+   "examples": [
+    "skillpoint wh3_main_skill_att_example"
+   ]
+  },
+  {
+   "id": "limbo",
+   "category": "character",
+   "syntax": [
+    "limbo"
+   ],
+   "aliases": [],
+   "patterns": [
+    "limbo"
+   ],
+   "target": "character",
+   "args": [],
+   "summary": "Send the selected character to limbo.",
+   "details": "The character disappears from the map. Its position is remembered so unlimbo can bring it back; a character in limbo cannot be selected.",
+   "examples": [
+    "limbo"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "unlimbo",
+   "category": "character",
+   "syntax": [
+    "unlimbo"
+   ],
+   "aliases": [],
+   "patterns": [
+    "unlimbo"
+   ],
+   "target": "none",
+   "args": [],
+   "summary": "Bring the last character sent to limbo back to its old position.",
+   "examples": [
+    "unlimbo"
+   ],
+   "singlePlayerOnly": true
   },
   {
    "id": "rankup",
@@ -2623,6 +2711,238 @@
    "args": [],
    "summary": "Move the console back to the top left.",
    "details": "Double-clicking the grip on the left of the console box does the same."
+  },
+  {
+   "id": "upgrade",
+   "category": "army",
+   "syntax": [
+    "upgrade <unit> <new unit>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "upgrade ([^ ]+) ([^ ]+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "unit",
+     "optional": false,
+     "keys": "units"
+    },
+    {
+     "name": "new unit",
+     "optional": false,
+     "keys": "units"
+    }
+   ],
+   "summary": "Upgrade the first matching unit in the selected army to another unit.",
+   "details": "Unit and new unit are main unit keys.",
+   "examples": [
+    "upgrade wh_main_emp_inf_swordsmen wh_main_emp_inf_halberdiers"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "spawnforce",
+   "category": "army",
+   "syntax": [
+    "spawnforce <force>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "spawnforce ([^ ]+)"
+   ],
+   "target": "army",
+   "args": [
+    {
+     "name": "force",
+     "optional": false,
+     "keys": "spawnable_forces"
+    }
+   ],
+   "summary": "Spawn a spawnable force army for your faction next to the selection.",
+   "details": "Force is a spawnable_forces key. Needs a settlement or the army panel open.",
+   "examples": [
+    "spawnforce wh2_dlc14_ritual_def_warmaster"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "climate",
+   "category": "settlement",
+   "syntax": [
+    "climate <climate>",
+    "climate reset"
+   ],
+   "aliases": [],
+   "patterns": [
+    "climate (.+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "climate",
+     "optional": false,
+     "keys": "climates"
+    }
+   ],
+   "summary": "Override the selected settlement's climate, or restore it with reset.",
+   "details": "Climate is a settlement climate type key. A failed override is logged to the console.",
+   "examples": [
+    "climate climate_desert",
+    "climate reset"
+   ]
+  },
+  {
+   "id": "bslot",
+   "category": "settlement",
+   "syntax": [
+    "bslot <slot> <building>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "bslot (%d+) ([^ ]+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "slot",
+     "optional": false
+    },
+    {
+     "name": "building",
+     "optional": false,
+     "keys": "buildings"
+    }
+   ],
+   "summary": "Instantly build a building for free in a numbered slot of the selected settlement.",
+   "examples": [
+    "bslot 1 wh_main_emp_barracks_1"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "lifecycle",
+   "category": "settlement",
+   "syntax": [
+    "lifecycle <building> [turns]"
+   ],
+   "aliases": [],
+   "patterns": [
+    "lifecycle ([^ ]+)",
+    "lifecycle ([^ ]+) (%d+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "building",
+     "optional": false,
+     "keys": "buildings"
+    },
+    {
+     "name": "turns",
+     "optional": true
+    }
+   ],
+   "summary": "Advance a lifecycle building in the selected settlement.",
+   "details": "Without turns it moves to its next stage; with turns it progresses by that many turns.",
+   "examples": [
+    "lifecycle wh3_example_building 5"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "fslotdone",
+   "category": "settlement",
+   "syntax": [
+    "fslotdone"
+   ],
+   "aliases": [],
+   "patterns": [
+    "fslotdone"
+   ],
+   "target": "settlement",
+   "args": [],
+   "summary": "Finish construction of the foreign slots in the selected settlement.",
+   "details": "Tries your faction's foreign slots first, then those of other factions.",
+   "examples": [
+    "fslotdone"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "expose",
+   "category": "settlement",
+   "syntax": [
+    "expose <faction>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "expose ([^ ]+)"
+   ],
+   "target": "settlement",
+   "args": [
+    {
+     "name": "faction",
+     "optional": false,
+     "keys": "factions"
+    }
+   ],
+   "summary": "Reveal a hidden garrison, such as an under-city, in the selected settlement to a faction.",
+   "examples": [
+    "expose wh3_main_ksl_kislev"
+   ],
+   "singlePlayerOnly": true
+  },
+  {
+   "id": "ritualcd",
+   "category": "events",
+   "syntax": [
+    "ritualcd <ritual> <turns>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "ritualcd ([^ ]+) (%d+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "ritual",
+     "optional": false,
+     "keys": "rituals"
+    },
+    {
+     "name": "turns",
+     "optional": false
+    }
+   ],
+   "summary": "Set a ritual's remaining cooldown in turns.",
+   "examples": [
+    "ritualcd wh3_example_ritual 5"
+   ]
+  },
+  {
+   "id": "missiondone",
+   "category": "events",
+   "syntax": [
+    "missiondone <mission>"
+   ],
+   "aliases": [],
+   "patterns": [
+    "missiondone ([^ ]+)"
+   ],
+   "target": "faction",
+   "args": [
+    {
+     "name": "mission",
+     "optional": false,
+     "keys": "missions"
+    }
+   ],
+   "summary": "Mark an active mission as succeeded.",
+   "examples": [
+    "missiondone wh3_example_mission"
+   ]
   }
  ]
 }
